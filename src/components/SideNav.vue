@@ -1,11 +1,19 @@
 <template>
   <v-col cols="2">
     <v-sheet rounded="lg">
-      <v-list color="transparent">
+      <v-list
+      dense
+      color="transparent">
         <v-list-item
+        v-for="feed in feeds"
+        :key="feed.title"
+        @click="fetchPosts(feed.url)"
+        link
         >
           <v-list-item-content>
-            <v-list-item-title class="text-wrap">
+            <v-list-item-title
+            class="text-wrap">
+              {{feed.title}}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -17,10 +25,6 @@
 <script>
 
 export default {
-  mounted() {
-    // eslint-disable-next-line
-    // console.log(this.feeds);
-  },
   data() {
     return {
       feeds: this.feed,

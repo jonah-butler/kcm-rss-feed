@@ -5,8 +5,11 @@
       <v-container>
         <v-row>
           <SideNav
+          v-on:posts="buildPosts"
           :feed="feeds"/>
-          <MainContent />
+          <MainContent
+          :posts="channel"
+          />
         </v-row>
       </v-container>
     </v-main>
@@ -32,33 +35,30 @@ export default {
   },
   data() {
     return {
-      // feed: {
-      //   title: '',
-      //   url: '',
-      //   imageUrl: '',
-      //   posts: null,
-      // },
-      // currentPost: null,
-      test: 'what up',
       feeds: Feeds.feeds,
+      channel: {
+        selected: false,
+        imageURL: null,
+        posts: null,
+        title: null,
+      },
     };
   },
   methods: {
-    printPosts(value) {
-      // eslint-disable-next-line
-      console.log(value);
+    buildPosts(value) {
+      this.channel.selected = !this.channel.selected;
+      this.getImage(value);
+      this.getTitle(value);
+      this.getPosts(value);
     },
-    async getPosts() {
-      // let blogs = await fetch('https://www.simplifyingthemarket.com/en/feed/?a=186161-a1b0b6b3364ed92fe215bff8a46af47a%2F');
-      // blogs = await blogs.text();
-      // blogs = new window.DOMParser().parseFromString(blogs, 'text/xml');
-      // // eslint-disable-next-line
-      //  this.feed.posts = blogs.getElementsByTagName('item');
-
-      // eslint-disable-next-line
-      // console.log(blogs);
-      // eslint-disable-next-line
-      // console.log(blogs.getElementByTagName('link'));
+    getImage(tree) {
+      this.channel.imageURL = tree.querySelector('channel image url').innerHTML;
+    },
+    getTitle(tree) {
+      this.channel.title = tree.querySelector('channel title').innerHTML;
+    },
+    getPosts(tree) {
+      this.channel.posts = tree.querySelectorAll('channel item');
     },
   },
 };
