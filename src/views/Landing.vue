@@ -28,16 +28,10 @@ export default {
     MainContent,
     TopNav,
   },
-  async mounted() {
-    // eslint-disable-next-line
-    // console.log(Feeds.feeds);
-    // this.feeds = Feeds.feeds;
-  },
   data() {
     return {
       feeds: Feeds.feeds,
       channel: {
-        selected: false,
         imageURL: null,
         posts: null,
         title: null,
@@ -46,10 +40,12 @@ export default {
   },
   methods: {
     buildPosts(value) {
-      this.channel.selected = !this.channel.selected;
       this.getImage(value);
       this.getTitle(value);
       this.getPosts(value);
+    },
+    goBack(value) {
+      this.goBack = value;
     },
     getImage(tree) {
       this.channel.imageURL = tree.querySelector('channel image url').innerHTML;
@@ -65,8 +61,5 @@ export default {
 </script>
 
 <style>
-  /* .v-list{
-    height: 100vh;
-  } */
 
 </style>

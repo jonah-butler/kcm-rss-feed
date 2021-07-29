@@ -156,13 +156,13 @@ export default {
   },
   props: {
     posts: Object,
+    back: Boolean,
   },
   watch: {
     posts: {
-      deep: true,
-      handler(a) {
+      handler() {
         // eslint-disable-next-line
-        console.log(a);
+        this.goBack();
       },
     },
   },
