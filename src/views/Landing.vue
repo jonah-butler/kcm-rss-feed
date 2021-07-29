@@ -5,7 +5,7 @@
 </template>
 
 <script>
-// import Feeds from '@/feeds';
+import Feeds from '@/feeds';
 
 export default {
   async mounted() {
@@ -28,7 +28,7 @@ export default {
       blogs = await blogs.text();
       blogs = new window.DOMParser().parseFromString(blogs, 'text/xml');
       // eslint-disable-next-line
-      console.log(blogs);
+      console.log(Feeds, blogs);
     },
   },
 };
