@@ -159,7 +159,9 @@ export default {
   },
   watch: {
     posts: {
-      handler() {
+      deep: true,
+      handler(a) {
+        console.log(a);
         this.goBack();
       },
     },
