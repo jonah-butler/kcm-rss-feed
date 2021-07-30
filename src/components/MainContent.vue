@@ -4,6 +4,7 @@
     min-height="70vh"
     ref="mainContent"
     rounded="lg">
+    <!-- If post landing -->
     <v-container
     v-if="postData && postData.title && !singlePost">
       <v-row dense>
@@ -60,21 +61,22 @@
         </v-col>
       </v-row>
     </v-container>
+    <!-- If single post landing -->
     <v-container
     v-else-if="singlePost && postData">
     <v-btn
     id="backBtn"
     @click="goBack">Back</v-btn>
       <v-card
-        color="white"
-        class="mx-auto"
-        max-width="644">
+      color="white"
+      class="mx-auto"
+      max-width="644">
       <v-img
       :src="printImageURL(singlePost)"
-      height="200px"
-      ></v-img>
+      height="200px">
+      </v-img>
       <v-card-title
-      class="text-h6"
+      class="text-h4"
       style="padding-bottom: 0px;">
         {{ printTitle(singlePost) }}
       </v-card-title>
@@ -94,6 +96,7 @@
     </v-expand-transition>
       </v-card>
     </v-container>
+    <!-- If not post landing or single post landing-->
     <v-container
     v-else>
       <h3>Select a feed to begin reading</h3>
@@ -114,7 +117,6 @@ export default {
   methods: {
     showSinglePost(index) {
       this.singlePost = this.postData.posts[index];
-      // eslint-disable-next-line
     },
     printTitle(post) {
       return post.querySelector('title').innerHTML;
@@ -139,18 +141,15 @@ export default {
       const fullDescription = new window
         .DOMParser()
         .parseFromString(post.querySelector('encoded').childNodes[0].textContent, 'text/html');
-      // eslint-disable-next-line
       fullDescription.querySelector('img').remove();
       this.scrollToTop();
       return fullDescription.querySelector('body').innerHTML;
     },
     scrollToTop() {
-      // eslint-disable-next-line
       this.$refs.mainContent.$el.scrollTop = 0;
     },
     goBack() {
       this.singlePost = null;
-      // eslint-disable-next-line
       this.scrollToTop();
     },
   },
@@ -161,7 +160,6 @@ export default {
   watch: {
     posts: {
       handler() {
-        // eslint-disable-next-line
         this.goBack();
       },
     },
@@ -186,6 +184,7 @@ export default {
   .date{
     color: red;
     font-size: 16px;
+    padding-top: 0px;
   }
   #backBtn{
     position: absolute;

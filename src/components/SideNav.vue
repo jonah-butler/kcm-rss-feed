@@ -8,8 +8,7 @@
         v-for="feed in feeds"
         :key="feed.title"
         @click="fetchPosts(feed.url)"
-        link
-        >
+        link>
           <v-list-item-content>
             <v-list-item-title
             class="text-wrap">
